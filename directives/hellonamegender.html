@@ -1,0 +1,27 @@
+<html>
+  <head>
+    <title>Hello Vue</title>
+  </head>
+  <body>
+    <div id="app">
+      <h1>
+        <template v-if="gender == 'male'">Mister</template>
+        <template v-if="gender == 'female'">Miss</template>
+        <template v-if="gender != 'female' && gender != 'male'">Q</template>
+          {{ name }}</h1>
+      Enter your name:
+      <input v-model="name">
+      <input v-model="gender">
+    </div>
+  </body>
+  <script src="https://unpkg.com/vue/dist/vue.js"></script>
+  <script>
+    new Vue({
+      el: '#app',
+      data: {
+        name: 'Anderson',
+        gender: 'male'
+      }
+    })
+  </script>
+</html>
