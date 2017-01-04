@@ -1,0 +1,64 @@
+<html>
+  <head>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <title>Upvote</title>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Famous stories {{ famous.length }}</h1>
+      <ul class="list-group">
+        <li v-for="story in famous" class="list-group-item">
+          {{ story.writer }} said "{{ story.plot }}"
+          and upvoted {{ story.upvotes }} times.
+        </li>
+      </ul>
+      <pre>
+        {{ $data }}
+      </pre>
+    </div>
+  </body>
+  <script src="https://unpkg.com/vue/dist/vue.js"></script>
+  <script>
+    new Vue({
+      el: '.container',
+      data: {
+        stories: [
+          {
+            plot: "I crashed my car today",
+            writer: "Alex",
+            upvotes: 28
+          },
+          {
+            plot: "Yesterday someone stole my bag",
+            writer: "John",
+            upvotes: 8
+          },
+          {
+            plot: "Someone ate my chocolate",
+            writer: "John",
+            upvotes: 51
+          },
+          {
+            plot: "I ate someone's chocolate",
+            writer: "Alex",
+            upvotes: 74
+          },
+        ]
+      },
+      computed: {
+        famous: function() {
+          return this.stories.filter(function(story) {
+            return story.upvotes > 25;
+          });
+        }
+      },
+      methods: {
+        storiesBy: function(writer) {
+          return this.stories.filter(function(story) {
+            return story.writer === writer;
+          });
+        }
+      }
+    })
+  </script>
+</html>

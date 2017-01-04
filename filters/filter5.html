@@ -1,0 +1,36 @@
+<html>
+  <head>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <title>Upvote</title>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Real Identities of Superheroes!</h1>
+      <ul class="list-group">
+        <li v-for="hero in heroes" class="list-group-item">
+          {{ hero | snitch }}
+        </li>
+      </ul>
+      <pre>
+        {{ $data }}
+      </pre>
+    </div>
+  </body>
+  <script src="https://unpkg.com/vue/dist/vue.js"></script>
+  <script>
+    Vue.filter('snitch', function(hero) {
+      return hero.secretId + ' is ' + hero.firstName + ' ' + hero.lastName + ' in real life!'
+    });
+    new Vue({
+      el: '.container',
+      data: {
+        heroes: [
+          { firstName: 'Bruce', lastName: 'Wayne', secretId: 'Batman' },
+          { firstName: 'Clark', lastName: 'Kent', secretId: 'Superman' },
+          { firstName: 'Jay', lastName: 'Garrick', secretId: 'Flash' },
+          { firstName: 'Peter', lastName: 'Parker', secretId: 'Spiderman' },
+        ]
+      },
+    })
+  </script>
+</html>
