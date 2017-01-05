@@ -1,0 +1,68 @@
+<html>
+<head>
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+  <title>Hello Vue</title>
+</head>
+<body>
+  <div id="app">
+    <div class="container">
+      <h1>Planets</h1>
+      <ul class="list-group">
+        <planet v-for="planet in planets" :planet="planet"></story>
+      </ul>
+      <pre>{{ $data }}</pre>
+    </div>
+  </div>
+  <template id="planet-template">
+      <li  class="list-group-item">
+          Planet: {{ planet.name }} Visited {{ planet.visitCount }} times
+          <button v-show="canVisit" @click="visit" class="btn btn-default">
+            Visit
+          </button>
+          <span v-show="planet.visitCount > 0" class="glyphicon glyphicon-plane pull-right" aria-hidden="true"></span>
+      </li>
+  </template>
+</body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.0.1/vue.js"></script>
+<script type="text/javascript">
+  Vue.component('planet', {
+    template: "#planet-template",
+    props: ['planet'],
+    methods: {
+      visit: function() {
+        this.planet.visitCount += 1;
+      },
+    },
+    computed: {
+      canVisit: function() {
+        return this.planet.visitCount < 3;
+      }
+    }
+  });
+
+new Vue({
+    el: '#app',
+    data: {
+        planets: [
+            {
+              name: 'Venus',
+              visitCount: 0,
+            },
+            {
+              name: 'Saturn',
+              visitCount: 0,
+            },
+            {
+              name: 'Mars',
+              visitCount: 0,
+            },
+            {
+              name: 'Mercury',
+              visitCount: 0,
+            },
+        ],
+    }
+})
+</script>
+</html>
+

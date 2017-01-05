@@ -1,0 +1,26 @@
+<html>
+  <head>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <title>Components</title>
+  </head>
+  <body>
+    <div class="container">
+      <story v-bind:story="{plot: 'Story 1', writer: 'Author 1'}"></story>
+      <story v-bind:story="{plot: 'Story 2', writer: 'Author 2'}"></story>
+    </div>
+  </body>
+  <script src="https://unpkg.com/vue/dist/vue.js"></script>
+
+  <script type="text/template" id="story-template">
+    <h1>{{ story.writer }} said "{{ story.plot }}"</h1>
+  </script>
+  <script>
+    Vue.component('story', {
+      props: ['story'],
+      template: '#story-template'
+    });
+    new Vue({
+      el: '.container',
+    })
+  </script>
+</html>
