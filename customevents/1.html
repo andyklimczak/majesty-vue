@@ -1,0 +1,33 @@
+<html>
+  <head>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <title>Upvote</title>
+  </head>
+  <body>
+    <div class="container text-center">
+      <p style="font-size: 140px">
+        {{ votes }}
+      </p>
+      <button class="btn btn-primary" @click="vote">Vote</button>
+    </div>
+  </body>
+  <script src="https://unpkg.com/vue/dist/vue.js"></script>
+  <script>
+    new Vue({
+      el: '.container',
+      data: {
+        votes: 0
+      },
+      methods: {
+        vote: function(writer) {
+          this.$emit('voted');
+        },
+      },
+      created() {
+        this.$on('voted', function(button) {
+          this.votes++;
+        })
+      }
+    })
+  </script>
+</html>

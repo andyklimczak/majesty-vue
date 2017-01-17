@@ -1,0 +1,90 @@
+<html>
+  <head>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <title>Upvote</title>
+  </head>
+  <body>
+    <div id="app">
+      <div class="container">
+        <h1>Let's hear some stories</h1>
+        <ul class="list-group">
+          <story v-for="story in stories" :story="story" :favorite="favorite" @update="updateFavorite"></story>
+        </ul>
+      </div>
+      <pre>
+        {{ $data }}
+      </pre>
+    </div>
+  </body>
+  <script src="https://unpkg.com/vue/dist/vue.js"></script>
+  <template id="story-template">
+    <li class="list-group-item">
+      {{ story.writer }} said "{{ story.plot }}"
+      Story upvotes {{ story.upvotes }}
+      <button v-show="!story.voted" @click="upvote" class="btn btn-default">
+        Upvote
+      </button>
+      <button v-show="!isFavorite" @click="markAsFavorite" class="btn btn-primary">
+        Favorite
+      </button>
+      <span v-show="isFavorite" class="glyphicon glyphicon-star pull-right" aria-hidden="true"></span>
+    </li>
+  </template>
+  <script>
+    Vue.component('story', {
+      template: '#story-template',
+      props: ['story', 'favorite'],
+      methods: {
+        upvote: function() {
+          this.story.upvotes += 1;
+          this.story.voted = true;
+        },
+        markAsFavorite: function() {
+          this.$emit('update', this.story);
+        }
+      },
+      computed: {
+        isFavorite: function() {
+          return this.story == this.favorite;
+        }
+      },
+    });
+    new Vue({
+      el: '#app',
+      data: {
+        stories: [
+          {
+            plot: 'Story 1',
+            writer: 'Writer 1',
+            upvotes: 20,
+            voted: false,
+          },
+          {
+            plot: 'Story 2',
+            writer: 'Writer 2',
+            upvotes: 0,
+            voted: false,
+          },
+          {
+            plot: 'Story 3',
+            writer: 'Writer 3',
+            upvotes: 15,
+            voted: false,
+          },
+          {
+            plot: 'Story 4',
+            writer: 'Writer 4',
+            upvotes: 56,
+            voted: false,
+          },
+        ],
+        favorite: {},
+      },
+      methods: {
+        updateFavorite: function(story) {
+          this.favorite = story;
+        }
+      },
+    })
+  </script>
+</html>

@@ -1,0 +1,40 @@
+<html>
+  <head>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <title>Upvote</title>
+  </head>
+  <body>
+    <div class="container text-center">
+      <p style="font-size: 140px">
+        {{ votes }}
+      </p>
+      <food @voted="countVote" name="Cheeseburger"></food>
+    </div>
+  </body>
+  <script src="https://unpkg.com/vue/dist/vue.js"></script>
+  <template id="food">
+    <button class="btn btn-default" @click="vote">{{ name }}</button>
+  </template>
+  <script>
+    Vue.component('food', {
+      template: '#food',
+      props: ['name'],
+      methods: {
+        vote: function() {
+          this.$emit('voted');
+        }
+      },
+    });
+    new Vue({
+      el: '.container',
+      data: {
+        votes: 0
+      },
+      methods: {
+        countVote: function() {
+          this.votes++;
+        },
+      },
+    })
+  </script>
+</html>
