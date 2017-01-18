@@ -20,16 +20,9 @@
   <template id="chariot-template">
     <li class="list-group-item">
       {{ chariot.name }} has {{ chariot.horses }} horse(s) !
-      <button v-show="noneSelected" @click="markAsSelected" class="btn btn-primary">
-        Pick Chariot
+      <button @click="markAsSelected" class="btn btn-primary" :disabled="isSelected">
+        {{ action }}
       </button>
-      <button v-show="hasMoreHorses" @click="markAsSelected" class="btn btn-primary">
-        Hire Horses
-      </button>
-      <button v-show="hasLessHorses" @click="markAsSelected" class="btn btn-primary">
-        Dismiss Horses
-      </button>
-      <button v-show="isSelected" class="btn btn-primary" disabled>Riding</button>
     </li>
   </template>
   <script>
@@ -57,6 +50,17 @@
         },
         hasLessHorses: function() {
           return (!this.isSelected) && this.chariot.horses < this.selected.horses;
+        },
+        action: function() {
+          if(this.noneSelected) {
+            return "Pick Chariot";
+          } else if(this.hasMoreHorses) {
+            return "Hire Horses";
+          } else if(this.hasLessHorses) {
+            return "Dismiss Horses";
+          } else {
+            return "Riding";
+          }
         }
       },
     });
