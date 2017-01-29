@@ -1,0 +1,20 @@
+<html>
+  <head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <title>Components</title>
+  </head>
+  <body class="container-fluid">
+    <div id="app" class="text-center" :style="{'background-color': inputColor, 'height': '100%'}">
+      <input type="color" v-model="inputColor">
+    </div>
+  </body>
+  <script src="https://unpkg.com/vue/dist/vue.js"></script>
+  <script>
+    new Vue({
+      el: '#app',
+      data: {
+        inputColor: '#fff000'
+      },
+    })
+  </script>
+</html>
