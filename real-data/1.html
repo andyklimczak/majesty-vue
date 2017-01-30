@@ -1,0 +1,44 @@
+<html>
+  <head>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+    <title>Hello Vue</title>
+  </head>
+  <body>
+    <div id="app">
+      <div class="container">
+        <h1>Let's hear some stories!</h1>
+        <ul class="list-group">
+          <story v-for="story in stories" :story="story"></story>
+        </ul>
+      <pre>{{ $data }}</pre>
+      </div>
+    </div>
+  </body>
+  <template id="story-template">
+    <li class="list-group-item">
+      {{ story.writer }} said "{{ story.plot }}".
+      <span>Story upvotes {{ story.upvotes }}.</span>
+    </li>
+  </template>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.0.1/vue.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+  <script type="text/javascript">
+    Vue.component('story', {
+      template: "#story-template",
+      props: ['story'],
+    });
+
+var vm = new Vue({
+  el: '#app',
+  data: {
+    stories: [],
+  },
+  mounted: function() {
+    $.getJSON('https://radiant-tundra-67877.herokuapp.com/stories.json', function(data) {
+      vm.stories = data;
+    });
+  }
+})
+</script>
+</html>
+

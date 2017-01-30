@@ -1,0 +1,63 @@
+<html>
+  <head>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+    <title>Hello Vue</title>
+  </head>
+  <body>
+    <div id="app">
+      <table class="table table-striped">
+        <tr>
+          <th>#</th>
+          <th>Plot</th>
+          <th>Writer</th>
+          <th>Upvotes</th>
+          <th>Actions</th>
+        </tr>
+        <tr story v-for="story in stories" is="story" :story="story"></tr>
+      </table>
+      <p class="lead">Here's a list of all your stories</p>
+      <pre>{{ $data }}</pre>
+    </div>
+    <template id="story-template-raw">
+      <tr>
+        <td>
+          {{story.id}}
+        </td>
+        <td>
+          <span>
+            {{story.plot}}
+          </span>
+        </td>
+        <td>
+          <span>
+            {{story.writer}}
+          </span>
+        </td>
+        <td>
+          {{story.upvotes}}
+        </td>
+      </tr>
+    </template>
+  </body>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.0.1/vue.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+  <script type="text/javascript">
+    Vue.component('story', {
+      template: "#story-template-raw",
+      props: ['story'],
+    });
+
+var vm = new Vue({
+  el: '#app',
+  data: {
+    stories: [],
+  },
+  mounted: function() {
+    $.getJSON('https://radiant-tundra-67877.herokuapp.com/stories.json', function(data) {
+      vm.stories = data;
+    });
+  }
+})
+</script>
+</html>
+
