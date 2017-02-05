@@ -59,7 +59,7 @@
         upvoteStory: function(story) {
           story.upvotes++;
           $.ajax({
-            url: 'http://localhost:3000/api/stories/' + story.id,
+            url: 'https://powerful-hollows-81664.herokuapp.com/api/stories/' + story.id,
             type: 'PATCH',
             data: story,
           });
@@ -68,7 +68,7 @@
           var index = vm.stories.indexOf(story);
           vm.stories.splice(index, 1);
           $.ajax({
-            url: 'http://localhost:3000/stories/' + story.id,
+            url: 'https://powerful-hollows-81664.herokuapp.com/api/stories/' + story.id,
             type: 'DELETE'
           });
         }
@@ -81,7 +81,7 @@ var vm = new Vue({
     stories: [],
   },
   mounted: function() {
-    $.getJSON('http://localhost:3000/api/stories', function(data) {
+    $.getJSON('https://powerful-hollows-81664.herokuapp.com/api/stories', function(data) {
       vm.stories = data;
     });
   }
