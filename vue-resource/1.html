@@ -1,0 +1,85 @@
+<html>
+  <head>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+    <title>Hello Vue</title>
+  </head>
+  <body>
+    <div id="app">
+      <table class="table table-striped">
+        <tr>
+          <th>#</th>
+          <th>Plot</th>
+          <th>Writer</th>
+          <th>Upvotes</th>
+          <th>Actions</th>
+        </tr>
+        <tr story v-for="story in stories" is="story" :story="story"></tr>
+      </table>
+      <p class="lead">Here's a list of all your stories</p>
+      <pre>{{ $data }}</pre>
+    </div>
+    <template id="story-template-raw">
+      <tr>
+        <td>
+          {{story.id}}
+        </td>
+        <td>
+          <span>
+            {{story.plot}}
+          </span>
+        </td>
+        <td>
+          <span>
+            {{story.writer}}
+          </span>
+        </td>
+        <td>
+          {{story.upvotes}}
+        </td>
+        <td>
+          <div class="btn-group">
+            <button @click="upvoteStory(story)" class="btn btn-primary">
+              Upvote
+            </button>
+            <button @click="deleteStory(story)" class="btn btn-danger">
+              Delete
+            </button>
+          </div>
+        </td>
+      </tr>
+    </template>
+  </body>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.0.1/vue.js"></script>
+	<script src="https://cdn.jsdelivr.net/vue.resource/1.2.0/vue-resource.min.js"></script>
+  <script type="text/javascript">
+    Vue.component('story', {
+      template: "#story-template-raw",
+      props: ['story'],
+      methods: {
+        upvoteStory: function(story) {
+          story.upvotes++;
+          this.$http.patch('http://localhost:3000/api/stories/' + story.id, story);
+        },
+        deleteStory: function(story) {
+          var index = vm.stories.indexOf(story);
+          vm.stories.splice(index, 1);
+          this.$http.delete('http://localhost:3000/api/stories/' + story.id);
+        }
+      }
+    });
+
+var vm = new Vue({
+  el: '#app',
+  data: {
+    stories: [],
+  },
+  mounted: function() {
+    this.$http({url: 'http://localhost:3000/api/stories', methid: 'GET'})
+      .then(function(response) {
+        Vue.set(vm, 'stories', response.data);
+      });
+  }
+})
+</script>
+</html>
+
