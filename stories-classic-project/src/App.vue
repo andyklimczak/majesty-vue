@@ -1,29 +1,28 @@
 <template>
   <div id="app" class="container">
     <img src="./assets/logo.png">
-    <stories></stories>
     <register></register>
   </div>
 </template>
 
 <script>
-import Register from './components/Register'
+  import Register from './components/Register'
 
-export default {
-  name: 'app',
-  components: {
-    Register
+  export default {
+    name: 'app',
+    components: {
+      Register
+    }
   }
-}
 </script>
 
 <style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+  #app {
+    font-family: 'Avenir', Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-align: center;
+    color: #2c3e50;
+    margin-top: 60px;
+  }
 </style>
